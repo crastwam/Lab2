@@ -35,27 +35,24 @@ void readReading(){
     double lowest = DOUBLEMAX+1;
     double median = 0;
     double arrayOfDouble[INTMAX];
-    int arrayIndex = 0;
     double num;
 
     //Reading Reading.txt file
     while (inputFile >> num){
-        if(numberOfReading++ % 2 == 1) {
-            arrayOfDouble[arrayIndex++] = num;
-            average += num;
-            //Setting highest
-            if(num > highest){
-                highest = num;
-            }
-            //Setting lowest
-            if(num < lowest){
-                lowest = num;
-            }
+        inputFile >> num;
+        arrayOfDouble[numberOfReading++] = num;
+        average += num;
+        //Setting highest
+        if(num > highest){
+            highest = num;
+        }
+        //Setting lowest
+        if(num < lowest){
+            lowest = num;
         }
     }
 
     //Calculating number of reading, average, and median
-    numberOfReading /= 2;
     average /= numberOfReading;
     sort(arrayOfDouble, arrayOfDouble+numberOfReading);
     if(numberOfReading % 2 == 0){
