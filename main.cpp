@@ -2,6 +2,7 @@
 #include <fstream>
 #include <random>
 #include <iomanip>
+#include <algorithm>
 using namespace std;
 const int DOUBLEMAX = 90;
 const int DOUBLEMIN = 50;
@@ -16,9 +17,10 @@ void createReading(){
     uniform_real_distribution<double>doubleDistribution(DOUBLEMIN, DOUBLEMAX);
 
     int limit = intDistribution(generator);
+    outputFile << fixed << setprecision(3);
     for(int i = 0; i < limit; i++) {
         outputFile << i << " ";
-        outputFile << fixed << setprecision(3) << doubleDistribution(generator) << endl;
+        outputFile << doubleDistribution(generator) << endl;
     }
 }
 
@@ -29,11 +31,13 @@ void readReading(){
     double highest = DOUBLEMIN-1;
     double lowest = DOUBLEMAX+1;
     double median = 0;
-
+    double arrayOfDouble[INTMAX];
+    int arrayIndex = 0;
     double num;
+
     while (inputFile >> num){
         if(numberOfReading++ % 2 == 1) {
-            cout << num << endl;
+            arrayOfDouble[arrayIndex++] = num;
             average += num;
             if(num > highest){
                 highest = num;
@@ -45,11 +49,18 @@ void readReading(){
     }
     numberOfReading /= 2;
     average /= numberOfReading;
+    sort(arrayOfDouble, arrayOfDouble+numberOfReading);
+    if(numberOfReading % 2 == 0){
+        median = (arrayOfDouble[numberOfReading/2] + arrayOfDouble[numberOfReading/2-1])/2;
+    }else{
+        median = arrayOfDouble[numberOfReading/2];
+    }
 
+    cout << fixed << setprecision(3);
     cout << "There are "<< numberOfReading << " readings in the file." << endl;
-    cout << "The average reading is "<< average << "." << endl;
+    cout << "The average reading is " <<average << "." << endl;
     cout << "The highest reading is "<< highest << "." << endl;
-    cout << "The lowest reading is "<< lowest << "." << endl;
+    cout << "The lowest reading is " << lowest << "." << endl;
     cout << "The median reading is "<< median << "." << endl;
 }
 
