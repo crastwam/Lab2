@@ -25,21 +25,32 @@ void createReading(){
 void readReading(){
     ifstream inputFile("Reading.txt");
     int numberOfReading = 0;
-    double averge = 0;
-    double highest = 0;
-    double lowest = 0;
+    double average = 0;
+    double highest = DOUBLEMIN-1;
+    double lowest = DOUBLEMAX+1;
     double median = 0;
 
     double num;
     while (inputFile >> num){
         if(numberOfReading++ % 2 == 1) {
             cout << num << endl;
-
+            average += num;
+            if(num > highest){
+                highest = num;
+            }
+            if(num < lowest){
+                lowest = num;
+            }
         }
     }
     numberOfReading /= 2;
+    average /= numberOfReading;
 
     cout << "There are "<< numberOfReading << " readings in the file." << endl;
+    cout << "The average reading is "<< average << "." << endl;
+    cout << "The highest reading is "<< highest << "." << endl;
+    cout << "The lowest reading is "<< lowest << "." << endl;
+    cout << "The median reading is "<< median << "." << endl;
 }
 
 
