@@ -12,7 +12,8 @@ void createReading(){
     uniform_int_distribution<>intDistribution(512, 1024);
     uniform_real_distribution<double>doubleDistribution(50, 90);
 
-    for(int i = 0; i < intDistribution(generator); i++) {
+    int limit = intDistribution(generator);
+    for(int i = 0; i < limit; i++) {
         outputFile << i << " ";
         outputFile << fixed << setprecision(3) << doubleDistribution(generator) << endl;
     }
