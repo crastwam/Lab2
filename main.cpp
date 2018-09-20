@@ -19,8 +19,29 @@ void createReading(){
     }
 }
 
+void readReading(){
+    ifstream inputFile("Reading.txt");
+    int numberOfReading = 0;
+    int averge;
+    int highest;
+    int lowest;
+    int median;
+
+    double num;
+    while (inputFile >> num){
+        if(numberOfReading++ % 2 == 1) {
+            cout << num << endl;
+        }
+    }
+    numberOfReading /= 2;
+    numberOfReading--;
+
+    cout << "There are "<< numberOfReading << " readings in the file." << endl;
+}
+
 
 int main() {
     createReading();
+    readReading();
     return 0;
 }
