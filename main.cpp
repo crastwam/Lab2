@@ -17,9 +17,12 @@ void createReading(){
     uniform_real_distribution<double>doubleDistribution(DOUBLEMIN, DOUBLEMAX);
 
     int limit = intDistribution(generator);
+    //Setting decimal places to 3
     outputFile << fixed << setprecision(3);
     for(int i = 0; i < limit; i++) {
+        //Writing integer
         outputFile << i << " ";
+        //Writing double
         outputFile << doubleDistribution(generator) << endl;
     }
 }
@@ -35,18 +38,23 @@ void readReading(){
     int arrayIndex = 0;
     double num;
 
+    //Reading Reading.txt file
     while (inputFile >> num){
         if(numberOfReading++ % 2 == 1) {
             arrayOfDouble[arrayIndex++] = num;
             average += num;
+            //Setting highest
             if(num > highest){
                 highest = num;
             }
+            //Setting lowest
             if(num < lowest){
                 lowest = num;
             }
         }
     }
+
+    //Calculating number of reading, average, and median
     numberOfReading /= 2;
     average /= numberOfReading;
     sort(arrayOfDouble, arrayOfDouble+numberOfReading);
@@ -56,6 +64,7 @@ void readReading(){
         median = arrayOfDouble[numberOfReading/2];
     }
 
+    //Printing report
     cout << fixed << setprecision(3);
     cout << "There are "<< numberOfReading << " readings in the file." << endl;
     cout << "The average reading is " <<average << "." << endl;
@@ -63,7 +72,6 @@ void readReading(){
     cout << "The lowest reading is " << lowest << "." << endl;
     cout << "The median reading is "<< median << "." << endl;
 }
-
 
 int main() {
     createReading();
