@@ -52,7 +52,7 @@ void readReading(){
         }
     }
 
-    //Calculating number of reading, average, and median
+    //Calculating average, and median
     average /= numberOfReading;
     sort(arrayOfDouble, arrayOfDouble+numberOfReading);
     if(numberOfReading % 2 == 0){
